@@ -19,10 +19,11 @@ const addTransactionIntoDOM = transaction => {
     transactionsUl.append(li)
  
 }
-
+ 
 const updateBalanceValues = () => {
     const transactionsAmount = dummyTransactions.map(transaction => transaction.amount)
-    console.log(transactionsAmount)
+    const total = transactionsAmount.reduce((accumulator,transaction) => accumulator + transaction, 0)
+    console.log(total)
 }
 
 const init = () => {
@@ -32,4 +33,4 @@ const init = () => {
 
 init()
 
-//20:13
+//29:09
