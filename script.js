@@ -2,6 +2,8 @@ const transactionsUl = document.querySelector('#transactions')
 const incomeDisplay = document.querySelector('#money-plus')
 const expenseDisplay = document.querySelector('#money-minus')
 const balanceDisplay = document.querySelector('#balance')
+const form = document.querySelector('#form')
+console.log(form)
 
 const dummyTransactions = [
     {id: 1, name: 'Bolo de brigadeiro', amount: -20},
@@ -50,4 +52,4 @@ const init = () => {
 
 init()
 
-//29:09
+//43:14
