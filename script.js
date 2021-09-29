@@ -6,12 +6,17 @@ const form = document.querySelector('#form')
 const inputTransactionName = document.querySelector('#text')
 const inputTransactionAmount = document.querySelector('#amount')
 
-const dummyTransactions = [
+let dummyTransactions = [
     {id: 1, name: 'Bolo de brigadeiro', amount: -20},
     {id: 2, name: 'Salario', amount: 300},
     {id: 3, name: 'Torta', amount: -10},
     {id: 4, name: 'Violão', amount: 150}
 ]
+
+const removeTransaction = ID => {
+    dummyTransactions = dummyTransactions.filter(transaction => transaction.id !== ID)
+    init()
+}
 
 const addTransactionIntoDOM = transaction => {
     const operator = transaction.amount < 0 ? '-' : '+'
@@ -20,7 +25,12 @@ const addTransactionIntoDOM = transaction => {
     const li = document.createElement('li')//utilizado para criar um novo elemento HTML
 
     li.classList.add(CSSClass)
-    li.innerHTML = `${transaction.name} <span>${operator} R$ ${Math.abs(transaction.amount)}</span><button class="delete-btn">x</button>`
+    li.innerHTML = `
+    ${transaction.name}<span>${operator} R$ ${Math.abs(transaction.amount)}</span>
+    <button class="delete-btn" onClick="removeTransaction(${transaction.id})">
+        x
+    </button>
+    `
     
     transactionsUl.append(li)
  
@@ -69,7 +79,7 @@ form.addEventListener('submit', event => {
     const transaction = {
         id: generateID(), 
         name: transactionName, 
-        amount: transactionsAmount
+        amount: Number(transactionsAmount)
     }
 
     dummyTransactions.push(transaction)
