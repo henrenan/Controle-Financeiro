@@ -6,10 +6,10 @@ const form = document.querySelector('#form')
 const inputTransactionName = document.querySelector('#text')
 const inputTransactionAmount = document.querySelector('#amount')
 
-const localStoradeTransactions = JSON.parse(localStorage
+const localStorageTransactions = JSON.parse(localStorage
     .getItem('transactions'))
 let transactions = localStorage
-    .getItem('transaction') !== null ? localStoradeTransactions : [] 
+    .getItem('transactions') !== null ? localStorageTransactions : [] 
 
 const removeTransaction = ID => {
     transactions = transactions.filter(transaction => 
@@ -18,19 +18,16 @@ const removeTransaction = ID => {
     init()
 }
 
-const addTransactionIntoDOM = transaction => {
-    const operator = transaction.amount < 0 ? '-' : '+'
-    const CSSClass = transaction.amount <0 ? 'minus' : 'plus'
-    const amountWithoutOperator = Math.abs(transaction.amount)
+const addTransactionIntoDOM =({ amount, name, id }) => {
+    const operator = amount < 0 ? '-' : '+'
+    const CSSClass = amount <0 ? 'minus' : 'plus'
+    const amountWithoutOperator = Math.abs(amount)
     const li = document.createElement('li')//utilizado para criar um novo elemento HTML
 
     li.classList.add(CSSClass)
     li.innerHTML = `
-    ${transaction.name}<span>${operator} R$ ${Math.abs(transaction.amount)}</span>
-    <button class="delete-btn" onClick="removeTransaction(${transaction.id})">
-        x
-    </button>
-    `
+    ${name}<span>${operator} R$ ${Math.abs(amount)}</span>
+    <button class="delete-btn" onClick="removeTransaction(${id})">x</button>`
     
     transactionsUl.append(li)
  
@@ -52,8 +49,7 @@ const getTotal = transactionsAmount => transactionsAmount
 
  
 const updateBalanceValues = () => {
-    const transactionsAmount = transactions
-        .map(transaction => transaction.amount)
+    const transactionsAmount = transactions.map(({ amount })=> amount)
     const total = getTotal(transactionsAmount)
     const income = getIncome (transactionsAmount)
     const expense = getExpenses(transactionsAmount)
