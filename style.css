@@ -136,8 +136,8 @@ input[type='number'] {
   background-color: #e74c3c;
   border: 0;
   color: #fff;
-  font-size: 20px;
-  line-height: 20px;
+  font-size: 25px;
+  line-height: 30px;
   padding: 2px 5px;
   position: absolute;
   top: 50%;
@@ -145,6 +145,11 @@ input[type='number'] {
   transform: translate(-100%, -50%);
   opacity: 0;
   transition: opacity 0.3s ease;
+}
+
+#reset {
+  color: #e74c3c;
+  
 }
 
 .transactions li:hover .delete-btn {
